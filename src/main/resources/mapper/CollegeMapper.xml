@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.CollegeMapper">
+    <select id="selectAll" resultType="org.example.entity.College">
+        SELECT * FROM college
+    </select>
+
+    <select id="selectByCollegeId" parameterType="String" resultType="org.example.entity.College">
+        SELECT * FROM college WHERE college_id = #{collegeId}
+    </select>
+
+    <insert id="insert" parameterType="org.example.entity.College">
+        INSERT INTO college (college_id, college_name, remark)
+        VALUES (#{collegeId}, #{collegeName}, #{remark})
+    </insert>
+
+    <update id="update" parameterType="org.example.entity.College">
+        UPDATE college SET
+                           college_name = #{collegeName},
+                           remark = #{remark}
+        WHERE college_id = #{collegeId}
+    </update>
+</mapper>

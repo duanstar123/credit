@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.TeacherMapper">
+    <select id="selectByTeacherId" parameterType="String" resultType="org.example.entity.Teacher">
+        SELECT * FROM teacher WHERE teacher_id = #{teacherId}
+    </select>
+    <select id="selectAll" resultType="org.example.entity.Teacher">
+        SELECT * FROM teacher
+    </select>
+    <insert id="insert" parameterType="org.example.entity.Teacher">
+        INSERT INTO teacher (teacher_id, real_name, password, college_id)
+        VALUES (#{teacherId}, #{realName}, #{password}, #{collegeId})
+    </insert>
+    <update id="update" parameterType="org.example.entity.Teacher">
+        UPDATE teacher
+        SET real_name = #{realName}, password = #{password}, college_id = #{collegeId}
+        WHERE teacher_id = #{teacherId}
+    </update>
+    <delete id="delete" parameterType="String">
+        DELETE FROM teacher WHERE teacher_id = #{teacherId}
+    </delete>
+    <!-- 添加 updatePassword 方法的映射 -->
+    <update id="updatePassword" parameterType="org.example.entity.Teacher">
+        UPDATE teacher
+        SET password = #{password}
+        WHERE teacher_id = #{teacherId}
+    </update>
+</mapper>

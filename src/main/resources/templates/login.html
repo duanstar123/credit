@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>创新学分管理系统</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: #f8f9fa;
+        }
+        .login-container {
+            max-width: 500px;
+            width: 100%;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            background-color: white;
+        }
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 10px 10px 0 0;
+        }
+        .role-buttons {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 30px;
+            gap: 10px;
+        }
+        .role-buttons button {
+            padding: 10px 20px;
+            border: 1px solid #667eea;
+            background-color: white;
+            color: #667eea;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .role-buttons button.active {
+            background-color: #667eea;
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ced4da;
+            border-radius: 5px;
+        }
+        .login-button {
+            width: 100%;
+            padding: 12px;
+            background-color: #667eea;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .login-button:hover {
+            background-color: #5a6fd8;
+        }
+        .error-message {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="login-container">
+    <div class="login-header">
+        <h2>创新学分管理系统</h2>
+        <p>请选择角色并登录</p>
+    </div>
+
+    <!-- 错误信息显示 -->
+    <div th:if="${error != null}" class="error-message">
+        <span th:text="${error}"></span>
+    </div>
+
+    <!-- 角色选择按钮 -->
+    <div class="role-buttons">
+        <button id="studentLoginBtn" class="active" onclick="showStudentLogin()">学生登录</button>
+        <button id="teacherLoginBtn" onclick="showTeacherLogin()">教师登录</button>
+    </div>
+
+    <!-- 学生登录表单 -->
+    <div id="studentLoginForm">
+        <div class="form-group">
+            <label for="studentId">学号</label>
+            <input type="text" id="studentId" placeholder="请输入学号">
+        </div>
+        <div class="form-group">
+            <label for="studentPassword">密码</label>
+            <input type="password" id="studentPassword" placeholder="请输入密码">
+        </div>
+        <button class="login-button" onclick="studentLogin()">登录</button>
+    </div>
+
+    <!-- 教师登录表单 -->
+    <div id="teacherLoginForm" style="display: none;">
+        <div class="form-group">
+            <label for="teacherId">教师ID</label>
+            <input type="text" id="teacherId" placeholder="请输入教师ID">
+        </div>
+        <div class="form-group">
+            <label for="teacherPassword">密码</label>
+            <input type="password" id="teacherPassword" placeholder="请输入密码">
+        </div>
+        <button class="login-button" onclick="teacherLogin()">登录</button>
+    </div>
+</div>
+
+<script>
+    // 显示学生登录表单
+    function showStudentLogin() {
+        document.getElementById('studentLoginForm').style.display = 'block';
+        document.getElementById('teacherLoginForm').style.display = 'none';
+        document.getElementById('studentLoginBtn').classList.add('active');
+        document.getElementById('teacherLoginBtn').classList.remove('active');
+    }
+
+    // 显示教师登录表单
+    function showTeacherLogin() {
+        document.getElementById('studentLoginForm').style.display = 'none';
+        document.getElementById('teacherLoginForm').style.display = 'block';
+        document.getElementById('studentLoginBtn').classList.remove('active');
+        document.getElementById('teacherLoginBtn').classList.add('active');
+    }
+
+    // 学生登录点击事件
+    function studentLogin() {
+        var studentId = document.getElementById('studentId').value;
+        var password = document.getElementById('studentPassword').value;
+
+        // 简单验证
+        if (!studentId || !password) {
+            alert('请输入学号和密码');
+            return;
+        }
+
+        // 直接跳转到登录处理路径
+        window.location.href = '/student/login?studentId=' + encodeURIComponent(studentId) + '&password=' + encodeURIComponent(password);
+    }
+
+    // 教师登录点击事件
+    function teacherLogin() {
+        var teacherId = document.getElementById('teacherId').value;
+        var password = document.getElementById('teacherPassword').value;
+
+        // 简单验证
+        if (!teacherId || !password) {
+            alert('请输入教师ID和密码');
+            return;
+        }
+
+        // 直接跳转到登录处理路径
+        window.location.href = '/teacher/login?teacherId=' + teacherId + '&password=' + encodeURIComponent(password);
+    }
+</script>
+</body>
+</html>

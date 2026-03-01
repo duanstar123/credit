@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.ClassMapper">
+    <select id="selectAll" resultType="org.example.entity.ClassInfo">
+        SELECT * FROM class_info
+    </select>
+
+    <select id="selectByClassId" parameterType="String" resultType="org.example.entity.ClassInfo">
+        SELECT * FROM class_info WHERE class_id = #{classId}
+    </select>
+
+    <select id="selectByCondition" parameterType="Map" resultType="org.example.entity.ClassInfo">
+        SELECT * FROM class_info
+        <where>
+            <if test="classId != null">AND class_id = #{classId}</if>
+            <if test="className != null">AND class_name LIKE CONCAT('%', #{className}, '%')</if>
+            <if test="grade != null">AND grade = #{grade}</if>
+            <if test="majorId != null">AND major_id = #{majorId}</if>
+            <if test="collegeId != null">AND college_id = #{collegeId}</if>
+        </where>
+    </select>
+
+    <select id="selectByMajorId" parameterType="String" resultType="org.example.entity.ClassInfo">
+        SELECT * FROM class_info WHERE major_id = #{majorId}
+    </select>
+
+    <select id="selectByCollegeId" parameterType="String" resultType="org.example.entity.ClassInfo">
+        SELECT * FROM class_info WHERE college_id = #{collegeId}
+    </select>
+
+    <insert id="insert" parameterType="org.example.entity.ClassInfo">
+        INSERT INTO class_info (class_id, class_name, grade, major_id, college_id, remark)
+        VALUES (#{classId}, #{className}, #{grade}, #{majorId}, #{collegeId}, #{remark})
+    </insert>
+
+    <update id="update" parameterType="org.example.entity.ClassInfo">
+        UPDATE class_info SET
+                              class_name = #{className},
+                              grade = #{grade},
+                              major_id = #{majorId},
+                              college_id = #{collegeId},
+                              remark = #{remark}
+        WHERE class_id = #{classId}
+    </update>
+</mapper>
