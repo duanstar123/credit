@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.CreditMapper">
+    <select id="selectByStudentId" parameterType="String" resultType="org.example.entity.CreditApplication">
+        SELECT * FROM credit_application WHERE student_id = #{studentId}
+    </select>
+
+    <select id="selectAll" resultType="org.example.entity.CreditApplication">
+        SELECT * FROM credit_application
+    </select>
+
+    <select id="selectPending" resultType="org.example.entity.CreditApplication">
+        SELECT
+            ca.*,
+            s.name as studentName
+        FROM credit_application ca
+                 LEFT JOIN student s ON ca.student_id = s.student_id
+        WHERE ca.status = '未审核'
+    </select>
+    <select id="selectReviewed" resultType="org.example.entity.CreditApplication">
+        SELECT * FROM credit_application WHERE status IN ('已通过', '已拒绝')
+    </select>
+
+    <select id="selectByApplicationId" parameterType="String" resultType="org.example.entity.CreditApplication">
+        SELECT * FROM credit_application WHERE application_id = #{applicationId}
+    </select>
+
+    <insert id="insert" parameterType="org.example.entity.CreditApplication">
+        INSERT INTO credit_application (
+            application_id,
+            student_id,
+            category_id,
+            application_reason,
+            apply_date,
+            status,
+            credit_value
+        ) VALUES (
+                     #{applicationId},
+                     #{studentId},
+                     #{categoryId},
+                     #{applicationReason},
+                     #{applyDate},
+                     #{status},
+                     #{creditValue}
+                 )
+    </insert>
+
+    <update id="update" parameterType="org.example.entity.CreditApplication">
+        UPDATE credit_application SET
+                                      student_id = #{studentId},
+                                      category_id = #{categoryId},
+                                      application_reason = #{applicationReason},
+                                      status = #{status},
+                                      credit_value = #{creditValue}
+        WHERE application_id = #{applicationId}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM credit_application WHERE application_id = #{applicationId}
+    </delete>
+
+    <select id="selectApprovedByStudentId" parameterType="String" resultType="org.example.entity.CreditApplication">
+        SELECT * FROM credit_application WHERE student_id = #{studentId} AND status = '已通过'
+    </select>
+
+    <select id="selectPendingCountByStudentId" parameterType="String" resultType="Integer">
+        SELECT COUNT(*) FROM credit_application WHERE student_id = #{studentId} AND status = '未审核'
+    </select>
+
+    <select id="selectTotalCountByStudentId" parameterType="String" resultType="Integer">
+        SELECT COUNT(*) FROM credit_application WHERE student_id = #{studentId}
+    </select>
+</mapper>
