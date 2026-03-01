@@ -23,7 +23,9 @@
                            remark = #{remark}
         WHERE student_id = #{studentId}
     </update>
-
+    <delete id="delete" parameterType="String">
+        DELETE FROM student WHERE student_id = #{studentId}
+    </delete>
     <select id="selectByCondition" parameterType="Map" resultType="org.example.entity.Student">
         SELECT * FROM student
         <where>

@@ -11,7 +11,6 @@ public class Student implements Serializable {
     private String majorId;
     private String collegeId;
     private String password;
-    // 添加缺失的属性
     private String majorName;
     private String className;
 

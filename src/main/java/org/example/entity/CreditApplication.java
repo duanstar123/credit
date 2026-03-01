@@ -10,34 +10,15 @@ public class CreditApplication implements Serializable {
     private String applicationReason;
     private Date applyDate;
     private String status;
-    private String reviewerId;
-    private Date reviewDate;
-    private String reviewNote;
+    private Double creditValue;
+    private String reviewerId; // 添加 reviewerId 属性
+    private Date reviewDate; // 添加 reviewDate 属性
+    private String reviewNote; // 添加 reviewNote 属性
     private String screenshotUrl;
     private String certificateUrl;
     private String sourceCodeUrl;
 
-    // 构造方法、getter和setter
-    public CreditApplication() {}
-
-    public CreditApplication(String applicationId, String studentId, String categoryId, String applicationReason,
-                             Date applyDate, String status, String reviewerId, Date reviewDate,
-                             String reviewNote, String screenshotUrl, String certificateUrl, String sourceCodeUrl) {
-        this.applicationId = applicationId;
-        this.studentId = studentId;
-        this.categoryId = categoryId;
-        this.applicationReason = applicationReason;
-        this.applyDate = applyDate;
-        this.status = status;
-        this.reviewerId = reviewerId;
-        this.reviewDate = reviewDate;
-        this.reviewNote = reviewNote;
-        this.screenshotUrl = screenshotUrl;
-        this.certificateUrl = certificateUrl;
-        this.sourceCodeUrl = sourceCodeUrl;
-    }
-
-    // getter和setter方法
+    // getter 和 setter 方法
     public String getApplicationId() { return applicationId; }
     public void setApplicationId(String applicationId) { this.applicationId = applicationId; }
     public String getStudentId() { return studentId; }
@@ -50,12 +31,14 @@ public class CreditApplication implements Serializable {
     public void setApplyDate(Date applyDate) { this.applyDate = applyDate; }
     public String getStatus() { return status; }
     public void setStatus(String status) { this.status = status; }
-    public String getReviewerId() { return reviewerId; }
-    public void setReviewerId(String reviewerId) { this.reviewerId = reviewerId; }
-    public Date getReviewDate() { return reviewDate; }
-    public void setReviewDate(Date reviewDate) { this.reviewDate = reviewDate; }
-    public String getReviewNote() { return reviewNote; }
-    public void setReviewNote(String reviewNote) { this.reviewNote = reviewNote; }
+    public Double getCreditValue() { return creditValue; }
+    public void setCreditValue(Double creditValue) { this.creditValue = creditValue; }
+    public String getReviewerId() { return reviewerId; } // 添加 getReviewerId 方法
+    public void setReviewerId(String reviewerId) { this.reviewerId = reviewerId; } // 添加 setReviewerId 方法
+    public Date getReviewDate() { return reviewDate; } // 添加 getReviewDate 方法
+    public void setReviewDate(Date reviewDate) { this.reviewDate = reviewDate; } // 添加 setReviewDate 方法
+    public String getReviewNote() { return reviewNote; } // 添加 getReviewNote 方法
+    public void setReviewNote(String reviewNote) { this.reviewNote = reviewNote; } // 添加 setReviewNote 方法
     public String getScreenshotUrl() { return screenshotUrl; }
     public void setScreenshotUrl(String screenshotUrl) { this.screenshotUrl = screenshotUrl; }
     public String getCertificateUrl() { return certificateUrl; }

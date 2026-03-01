@@ -1,143 +1,102 @@
 package org.example.controller;
 
 import org.example.entity.CreditCategory;
-import org.example.service.CategoryService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.example.service.CreditCategoryService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
 
 import jakarta.servlet.http.HttpSession;
-import java.util.Map;
+import java.util.Date;
 
 @Controller
-@RequestMapping("/category")  // 修改：移除 /credit 前缀
+@RequestMapping("/category")
 public class CategoryController {
+    private final CreditCategoryService creditCategoryService;
 
-    @Autowired
-    private CategoryService categoryService;
+    public CategoryController(CreditCategoryService creditCategoryService) {
+        this.creditCategoryService = creditCategoryService;
+    }
 
-    // 创建学分类别页面
+    // 跳转到创建学分类别页面
     @GetMapping("/create")
-    public ModelAndView createCategory(HttpSession session) {
-        ModelAndView mav = new ModelAndView("teacher/category/create");
+    public String createCategory(HttpSession session) {
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
-            return mav;
+            return "redirect:/login";
         }
-        return mav;
+        return "teacher/category/create";
     }
 
-    // 提交创建学分类别
+    // 创建学分类别
     @PostMapping("/create")
-    public ModelAndView submitCreateCategory(
-            @RequestParam Map<String, Object> params,
-            HttpSession session) {
-        ModelAndView mav = new ModelAndView("redirect:/teacher/categories");  // 修改：移除 /credit 前缀
+    public String addCategory(CreditCategory category, HttpSession session) {
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
-            return mav;
+            return "redirect:/login";
         }
 
         try {
-            // 创建学分类别对象
-            CreditCategory category = new CreditCategory();
-            category.setCategoryId((String) params.get("categoryId"));
-            category.setCategoryName((String) params.get("categoryName"));
-            category.setCreditValue(Double.parseDouble((String) params.get("creditValue")));
-            category.setRemark((String) params.get("remark"));
-            category.setStatus(1); // 默认为启用状态
-
-            // 调用服务层创建学分类别
-            categoryService.addCategory(category);
-            mav.addObject("success", "学分类别创建成功");
+            category.setCreateDate(new Date());
+            category.setStatus(1);
+            creditCategoryService.addCategory(category);
+            return "redirect:/teacher/categories?success=学分类别创建成功";
         } catch (Exception e) {
-            mav.addObject("error", "创建失败：" + e.getMessage());
+            return "redirect:/teacher/categories?error=学分类别创建失败：" + e.getMessage();
         }
-
-        return mav;
     }
 
-    // 编辑学分类别页面
+    // 跳转到编辑学分类别页面
     @GetMapping("/edit")
-    public ModelAndView editCategory(
-            @RequestParam String categoryId,
-            HttpSession session) {
-        ModelAndView mav = new ModelAndView("teacher/category/edit");
+    public String editCategory(@RequestParam("categoryId") String categoryId, Model model, HttpSession session) {
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
-            return mav;
+            return "redirect:/login";
         }
 
         try {
-            // 获取学分类别信息
-            CreditCategory category = categoryService.getCategoryById(categoryId);
-            mav.addObject("category", category);
+            CreditCategory category = creditCategoryService.getCategoryById(categoryId);
+            model.addAttribute("category", category);
+            return "teacher/category/edit";
         } catch (Exception e) {
-            mav.setViewName("redirect:/teacher/categories");  // 修改：移除 /credit 前缀
-            mav.addObject("error", "获取学分类别信息失败：" + e.getMessage());
+            return "redirect:/teacher/categories?error=获取学分类别信息失败：" + e.getMessage();
         }
-
-        return mav;
     }
 
-    // 提交编辑学分类别
+    // 更新学分类别
     @PostMapping("/edit")
-    public ModelAndView submitEditCategory(
-            @RequestParam Map<String, Object> params,
-            HttpSession session) {
-        ModelAndView mav = new ModelAndView("redirect:/teacher/categories");  // 修改：移除 /credit 前缀
+    public String updateCategory(CreditCategory category, HttpSession session) {
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
-            return mav;
+            return "redirect:/login";
         }
 
         try {
-            // 创建学分类别对象
-            CreditCategory category = new CreditCategory();
-            category.setCategoryId((String) params.get("categoryId"));
-            category.setCategoryName((String) params.get("categoryName"));
-            category.setCreditValue(Double.parseDouble((String) params.get("creditValue")));
-            category.setRemark((String) params.get("remark"));
-
-            // 调用服务层更新学分类别
-            categoryService.updateCategory(category);
-            mav.addObject("success", "学分类别更新成功");
+            creditCategoryService.updateCategory(category);
+            return "redirect:/teacher/categories?success=学分类别更新成功";
         } catch (Exception e) {
-            mav.addObject("error", "更新失败：" + e.getMessage());
+            return "redirect:/teacher/categories?error=学分类别更新失败：" + e.getMessage();
         }
-
-        return mav;
     }
 
     // 更新学分类别状态
     @GetMapping("/status")
-    public ModelAndView updateCategoryStatus(
-            @RequestParam String categoryId,
-            @RequestParam int status,
-            HttpSession session) {
-        ModelAndView mav = new ModelAndView("redirect:/teacher/categories");  // 修改：移除 /credit 前缀
+    public String updateCategoryStatus(@RequestParam("categoryId") String categoryId, @RequestParam("status") int status, HttpSession session) {
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
-            return mav;
+            return "redirect:/login";
         }
 
         try {
-            // 调用服务层更新状态
-            categoryService.updateCategoryStatus(categoryId, status);
-            mav.addObject("success", "状态更新成功");
+            CreditCategory category = creditCategoryService.getCategoryById(categoryId);
+            category.setStatus(status);
+            creditCategoryService.updateCategory(category);
+            return "redirect:/teacher/categories?success=学分类别状态更新成功";
         } catch (Exception e) {
-            mav.addObject("error", "状态更新失败：" + e.getMessage());
+            return "redirect:/teacher/categories?error=学分类别状态更新失败：" + e.getMessage();
         }
-
-        return mav;
     }
 }

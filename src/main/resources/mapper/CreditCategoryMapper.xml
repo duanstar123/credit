@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.CreditCategoryMapper">
+    <select id="selectAll" resultType="org.example.entity.CreditCategory">
+        SELECT * FROM credit_category WHERE status = 1
+    </select>
+
+    <select id="selectById" parameterType="String" resultType="org.example.entity.CreditCategory">
+        SELECT * FROM credit_category WHERE category_id = #{categoryId}
+    </select>
+
+    <insert id="insert" parameterType="org.example.entity.CreditCategory">
+        INSERT INTO credit_category (category_id, category_name, credit_value, description, status)
+        VALUES (#{categoryId}, #{categoryName}, #{creditValue}, #{description}, #{status})
+    </insert>
+
+    <update id="update" parameterType="org.example.entity.CreditCategory">
+        UPDATE credit_category SET
+                                   category_name = #{categoryName},
+                                   credit_value = #{creditValue},
+                                   description = #{description},
+                                   status = #{status}
+        WHERE category_id = #{categoryId}
+    </update>
+
+    <delete id="delete" parameterType="String">
+        DELETE FROM credit_category WHERE category_id = #{categoryId}
+    </delete>
+</mapper>
