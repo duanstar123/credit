@@ -1,8 +1,10 @@
 package org.example.service.impl;
 
 import org.example.entity.CreditApplication;
+import org.example.entity.Student;
 import org.example.mapper.CreditMapper;
 import org.example.service.CreditService;
+import org.example.service.StudentService;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,9 +13,11 @@ import java.util.List;
 @Service
 public class CreditServiceImpl implements CreditService {
     private final CreditMapper creditMapper;
+    private final StudentService studentService;
 
-    public CreditServiceImpl(CreditMapper creditMapper) {
+    public CreditServiceImpl(CreditMapper creditMapper, StudentService studentService) {
         this.creditMapper = creditMapper;
+        this.studentService = studentService;
     }
 
     @Override
@@ -126,6 +130,7 @@ public class CreditServiceImpl implements CreditService {
             e.printStackTrace();
         }
     }
+
     @Override
     public double getTotalCreditByStudentId(String studentId) {
         try {
@@ -180,6 +185,74 @@ public class CreditServiceImpl implements CreditService {
             System.out.println("=== CreditService.getTotalApplicationCountByStudentId 异常 ===");
             e.printStackTrace();
             return 0;
+        }
+    }
+
+    @Override
+    public List<CreditApplication> getPendingApplications() {
+        try {
+            System.out.println("=== CreditService.getPendingApplications ===");
+            List<CreditApplication> applications = creditMapper.selectPending();
+            System.out.println("查询到的待审核申请数量: " + applications.size());
+
+            // 按申请编号排序（提取数字部分进行排序）
+            applications.sort((a1, a2) -> {
+                // 提取申请编号中的数字部分
+                String num1 = a1.getApplicationId().replaceAll("[^0-9]", "");
+                String num2 = a2.getApplicationId().replaceAll("[^0-9]", "");
+
+                // 转换为数字进行比较
+                try {
+                    long n1 = Long.parseLong(num1);
+                    long n2 = Long.parseLong(num2);
+                    return Long.compare(n1, n2);
+                } catch (NumberFormatException e) {
+                    // 如果转换失败，使用字符串比较
+                    return a1.getApplicationId().compareTo(a2.getApplicationId());
+                }
+            });
+
+            return applications;
+        } catch (Exception e) {
+            System.out.println("=== CreditService.getPendingApplications 异常 ===");
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
+    }
+    @Override
+    public List<CreditApplication> getReviewedApplications() {
+        try {
+            System.out.println("=== CreditService.getReviewedApplications ===");
+            List<CreditApplication> applications = creditMapper.selectReviewed();
+            System.out.println("查询到的已审核申请数量: " + applications.size());
+
+            // 按申请编号排序
+            applications.sort((a1, a2) -> {
+                String num1 = a1.getApplicationId().replaceAll("[^0-9]", "");
+                String num2 = a2.getApplicationId().replaceAll("[^0-9]", "");
+
+                try {
+                    long n1 = Long.parseLong(num1);
+                    long n2 = Long.parseLong(num2);
+                    return Long.compare(n1, n2);
+                } catch (NumberFormatException e) {
+                    return a1.getApplicationId().compareTo(a2.getApplicationId());
+                }
+            });
+
+            // 为每个申请添加学生姓名
+            for (CreditApplication app : applications) {
+                Student student = studentService.getStudentById(app.getStudentId());
+                if (student != null) {
+                    app.setStudentName(student.getName());
+                }
+            }
+
+            return applications;
+        } catch (Exception e) {
+            System.out.println("=== CreditService.getReviewedApplications 异常 ===");
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 }

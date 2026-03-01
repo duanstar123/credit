@@ -7,6 +7,8 @@ import java.util.List;
 public interface CreditMapper {
     List<CreditApplication> selectByStudentId(String studentId);
     List<CreditApplication> selectAll();
+    List<CreditApplication> selectPending();
+    List<CreditApplication> selectReviewed(); // 新增方法
     CreditApplication selectByApplicationId(String applicationId);
     void insert(CreditApplication application);
     void update(CreditApplication application);

@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.StudentMapper">
     <select id="selectByStudentId" parameterType="String" resultType="org.example.entity.Student">
-        SELECT * FROM student WHERE student_id = #{studentId}
+        SELECT
+            s.student_id,
+            s.password,
+            s.name,
+            s.gender,
+            s.major_id,
+            s.class_id,
+            s.grade,
+            c.class_name,
+            m.major_name
+        FROM student s
+                 LEFT JOIN class_info c ON s.class_id = c.class_id
+                 LEFT JOIN major m ON s.major_id = m.major_id
+        WHERE s.student_id = #{studentId}
+    </select>
+
+    <select id="selectAll" resultType="org.example.entity.Student">
+        SELECT
+            s.student_id,
+            s.password,
+            s.name,
+            s.gender,
+            s.major_id,
+            s.class_id,
+            s.grade,
+            c.class_name,
+            m.major_name
+        FROM student s
+                 LEFT JOIN class_info c ON s.class_id = c.class_id
+                 LEFT JOIN major m ON s.major_id = m.major_id
     </select>
 
     <insert id="insert" parameterType="org.example.entity.Student">
-        INSERT INTO student (student_id, password, name, gender, origin, grade, class_id, major_id, college_id, remark)
-        VALUES (#{studentId}, #{password}, #{name}, #{gender}, #{origin}, #{grade}, #{classId}, #{majorId}, #{collegeId}, #{remark})
+        INSERT INTO student (
+            student_id,
+            password,
+            name,
+            gender,
+            major_id,
+            class_id,
+            grade
+        ) VALUES (
+                     #{studentId},
+                     #{password},
+                     #{name},
+                     #{gender},
+                     #{majorId},
+                     #{classId},
+                     #{grade}
+                 )
     </insert>
 
     <update id="update" parameterType="org.example.entity.Student">
@@ -15,38 +61,13 @@
                            password = #{password},
                            name = #{name},
                            gender = #{gender},
-                           origin = #{origin},
-                           grade = #{grade},
-                           class_id = #{classId},
                            major_id = #{majorId},
-                           college_id = #{collegeId},
-                           remark = #{remark}
+                           class_id = #{classId},
+                           grade = #{grade}
         WHERE student_id = #{studentId}
     </update>
+
     <delete id="delete" parameterType="String">
         DELETE FROM student WHERE student_id = #{studentId}
     </delete>
-    <select id="selectByCondition" parameterType="Map" resultType="org.example.entity.Student">
-        SELECT * FROM student
-        <where>
-            <if test="studentId != null">AND student_id = #{studentId}</if>
-            <if test="name != null">AND name LIKE CONCAT('%', #{name}, '%')</if>
-            <if test="classId != null">AND class_id = #{classId}</if>
-            <if test="majorId != null">AND major_id = #{majorId}</if>
-            <if test="collegeId != null">AND college_id = #{collegeId}</if>
-            <if test="grade != null">AND grade = #{grade}</if>
-        </where>
-    </select>
-
-    <select id="selectByClassId" parameterType="String" resultType="org.example.entity.Student">
-        SELECT * FROM student WHERE class_id = #{classId}
-    </select>
-
-    <select id="selectByMajorId" parameterType="String" resultType="org.example.entity.Student">
-        SELECT * FROM student WHERE major_id = #{majorId}
-    </select>
-
-    <select id="selectByCollegeId" parameterType="String" resultType="org.example.entity.Student">
-        SELECT * FROM student WHERE college_id = #{collegeId}
-    </select>
 </mapper>

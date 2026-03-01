@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface CreditCategoryMapper {
     List<CreditCategory> selectAll();
-    CreditCategory selectById(String categoryId);
+    CreditCategory selectByCategoryId(String categoryId);
     void insert(CreditCategory category);
     void update(CreditCategory category);
     void delete(String categoryId);

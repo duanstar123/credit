@@ -1,7 +1,7 @@
 package org.example.service;
 
-import org.example.entity.CreditApplication;
 import org.example.entity.CreditCategory;
+
 import java.util.List;
 
 public interface CreditCategoryService {

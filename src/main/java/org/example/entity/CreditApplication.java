@@ -17,7 +17,7 @@ public class CreditApplication implements Serializable {
     private String screenshotUrl;
     private String certificateUrl;
     private String sourceCodeUrl;
-
+    private String studentName; // 添加 studentName 属性
     // getter 和 setter 方法
     public String getApplicationId() { return applicationId; }
     public void setApplicationId(String applicationId) { this.applicationId = applicationId; }
@@ -45,4 +45,6 @@ public class CreditApplication implements Serializable {
     public void setCertificateUrl(String certificateUrl) { this.certificateUrl = certificateUrl; }
     public String getSourceCodeUrl() { return sourceCodeUrl; }
     public void setSourceCodeUrl(String sourceCodeUrl) { this.sourceCodeUrl = sourceCodeUrl; }
+    public String getStudentName() { return studentName; } // 添加 getStudentName 方法
+    public void setStudentName(String studentName) { this.studentName = studentName; } // 添加 setStudentName 方法
 }

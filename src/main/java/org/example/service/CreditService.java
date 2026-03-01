@@ -7,6 +7,8 @@ import java.util.List;
 public interface CreditService {
     List<CreditApplication> getApplicationsByStudentId(String studentId);
     List<CreditApplication> getAllApplications();
+    List<CreditApplication> getPendingApplications();
+    List<CreditApplication> getReviewedApplications(); // 新增方法
     CreditApplication getApplicationById(String applicationId);
     void submitApplication(CreditApplication application);
     void updateApplication(CreditApplication application);

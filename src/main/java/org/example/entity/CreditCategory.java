@@ -10,6 +10,7 @@ public class CreditCategory implements Serializable {
     private String remark;
     private Date createDate;
     private int status;
+    private String description;
 
     // 构造方法、getter和setter
     public CreditCategory() {}
@@ -22,7 +23,15 @@ public class CreditCategory implements Serializable {
         this.createDate = createDate;
         this.status = status;
     }
-
+    public CreditCategory(String categoryId, String categoryName, double creditValue, String remark, Date createDate, int status, String description) {
+        this.categoryId = categoryId;
+        this.categoryName = categoryName;
+        this.creditValue = creditValue;
+        this.remark = remark;
+        this.createDate = createDate;
+        this.status = status;
+        this.description = description;
+    }
     // getter和setter方法
     public String getCategoryId() { return categoryId; }
     public void setCategoryId(String categoryId) { this.categoryId = categoryId; }
@@ -36,4 +45,6 @@ public class CreditCategory implements Serializable {
     public void setCreateDate(Date createDate) { this.createDate = createDate; }
     public int getStatus() { return status; }
     public void setStatus(int status) { this.status = status; }
+    public String getDescription() { return description; }
+    public void setDescription(String description) { this.description = description; }
 }

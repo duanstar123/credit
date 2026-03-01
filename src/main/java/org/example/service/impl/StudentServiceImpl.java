@@ -5,6 +5,9 @@ import org.example.mapper.StudentMapper;
 import org.example.service.StudentService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Service
 public class StudentServiceImpl implements StudentService {
     private final StudentMapper studentMapper;
@@ -34,6 +37,20 @@ public class StudentServiceImpl implements StudentService {
         } catch (Exception e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    @Override
+    public List<Student> getAllStudents() {
+        try {
+            System.out.println("=== StudentService.getAllStudents ===");
+            List<Student> students = studentMapper.selectAll();
+            System.out.println("查询到的学生数量: " + students.size());
+            return students;
+        } catch (Exception e) {
+            System.out.println("=== StudentService.getAllStudents 异常 ===");
+            e.printStackTrace();
+            return new ArrayList<>();
         }
     }
 
