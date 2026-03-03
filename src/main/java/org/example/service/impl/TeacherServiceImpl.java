@@ -11,7 +11,6 @@ import java.util.List;
 public class TeacherServiceImpl implements TeacherService {
     private final TeacherMapper teacherMapper;
 
-    // 使用构造函数注入
     public TeacherServiceImpl(TeacherMapper teacherMapper) {
         this.teacherMapper = teacherMapper;
     }

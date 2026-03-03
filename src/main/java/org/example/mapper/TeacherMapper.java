@@ -12,6 +12,5 @@ public interface TeacherMapper {
     void insert(Teacher teacher);
     void update(Teacher teacher);
     void delete(String teacherId);
-    // 添加 updatePassword 方法
     void updatePassword(Teacher teacher);
 }

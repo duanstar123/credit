@@ -14,10 +14,8 @@ public class Student implements Serializable {
     private String majorName;
     private String className;
 
-    // 构造方法
     public Student() {}
 
-    // getter 和 setter 方法
     public String getStudentId() { return studentId; }
     public void setStudentId(String studentId) { this.studentId = studentId; }
     public String getName() { return name; }
@@ -34,7 +32,6 @@ public class Student implements Serializable {
     public void setCollegeId(String collegeId) { this.collegeId = collegeId; }
     public String getPassword() { return password; }
     public void setPassword(String password) { this.password = password; }
-    // 添加缺失的 getter 和 setter 方法
     public String getMajorName() { return majorName; }
     public void setMajorName(String majorName) { this.majorName = majorName; }
     public String getClassName() { return className; }

@@ -7,7 +7,6 @@ public class College implements Serializable {
     private String collegeName;
     private String remark;
 
-    // 构造方法、getter和setter
     public College() {}
 
     public College(String collegeId, String collegeName, String remark) {
@@ -16,7 +15,6 @@ public class College implements Serializable {
         this.remark = remark;
     }
 
-    // getter和setter方法
     public String getCollegeId() { return collegeId; }
     public void setCollegeId(String collegeId) { this.collegeId = collegeId; }
     public String getCollegeName() { return collegeName; }

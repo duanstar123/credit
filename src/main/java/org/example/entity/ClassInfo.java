@@ -10,7 +10,6 @@ public class ClassInfo implements Serializable {
     private String collegeId;
     private String remark;
 
-    // 构造方法、getter和setter
     public ClassInfo() {}
 
     public ClassInfo(String classId, String className, String grade, String majorId, String collegeId, String remark) {
@@ -22,7 +21,6 @@ public class ClassInfo implements Serializable {
         this.remark = remark;
     }
 
-    // getter和setter方法
     public String getClassId() { return classId; }
     public void setClassId(String classId) { this.classId = classId; }
     public String getClassName() { return className; }

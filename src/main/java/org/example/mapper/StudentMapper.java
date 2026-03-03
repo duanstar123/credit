@@ -6,7 +6,7 @@ import java.util.List;
 
 public interface StudentMapper {
     Student selectByStudentId(String studentId);
-    List<Student> selectAll(); // 确保这个方法存在
+    List<Student> selectAll();
     void insert(Student student);
     void update(Student student);
     void delete(String studentId);

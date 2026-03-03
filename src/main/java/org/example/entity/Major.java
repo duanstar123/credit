@@ -8,7 +8,6 @@ public class Major implements Serializable {
     private String collegeId;
     private String remark;
 
-    // 构造方法、getter和setter
     public Major() {}
 
     public Major(String majorId, String majorName, String collegeId, String remark) {
@@ -18,7 +17,6 @@ public class Major implements Serializable {
         this.remark = remark;
     }
 
-    // getter和setter方法
     public String getMajorId() { return majorId; }
     public void setMajorId(String majorId) { this.majorId = majorId; }
     public String getMajorName() { return majorName; }

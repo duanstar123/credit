@@ -19,6 +19,6 @@ public interface TeacherService {
 
     // 根据教师ID查询
     Teacher getTeacherById(String teacherId);
-    void deleteTeacher(String teacherId); // 将 Integer 改为 String
+    void deleteTeacher(String teacherId);
     List<Teacher> getAllTeachers();
 }

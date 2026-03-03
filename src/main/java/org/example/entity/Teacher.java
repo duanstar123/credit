@@ -8,7 +8,6 @@ public class Teacher implements Serializable {
     private String realName;
     private String collegeId;
 
-    // 构造方法、getter和setter
     public Teacher() {}
 
     public Teacher(String teacherId, String password, String realName, String collegeId) {
@@ -18,7 +17,6 @@ public class Teacher implements Serializable {
         this.collegeId = collegeId;
     }
 
-    // getter和setter方法
     public String getTeacherId() { return teacherId; }
     public void setTeacherId(String teacherId) { this.teacherId = teacherId; }
     public String getPassword() { return password; }

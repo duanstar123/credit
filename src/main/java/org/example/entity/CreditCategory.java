@@ -12,7 +12,6 @@ public class CreditCategory implements Serializable {
     private int status;
     private String description;
 
-    // 构造方法、getter和setter
     public CreditCategory() {}
 
     public CreditCategory(String categoryId, String categoryName, double creditValue, String remark, Date createDate, int status) {
@@ -32,7 +31,7 @@ public class CreditCategory implements Serializable {
         this.status = status;
         this.description = description;
     }
-    // getter和setter方法
+
     public String getCategoryId() { return categoryId; }
     public void setCategoryId(String categoryId) { this.categoryId = categoryId; }
     public String getCategoryName() { return categoryName; }
