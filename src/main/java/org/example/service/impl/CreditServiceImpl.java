@@ -86,6 +86,7 @@ public class CreditServiceImpl implements CreditService {
         } catch (Exception e) {
             System.out.println("=== CreditService.submitApplication 异常 ===");
             e.printStackTrace();
+            throw e; // 重新抛出异常，让控制器捕获
         }
     }
 

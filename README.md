@@ -17,9 +17,9 @@ Maven 3.8 或更高版本
 构建项目：mvn clean install  
 运行项目：mvn spring-boot:run  
 访问系统：  
-登录页面：http://localhost:8083/login  
-教师端：http://localhost:8083/teacher/login  
-学生端：http://localhost:8083/student/login  
+登录页面：http://localhost:8085/login  
+教师端：http://localhost:8085/teacher/login  
+学生端：http://localhost:8085/student/login  
 
 功能说明
 

@@ -29,22 +29,22 @@
 
     <insert id="insert" parameterType="org.example.entity.CreditApplication">
         INSERT INTO credit_application (
-            application_id,
-            student_id,
-            category_id,
-            application_reason,
-            apply_date,
-            status,
-            credit_value
+        application_id,
+        student_id,
+        category_id,
+        application_reason,
+        apply_date,
+        status,
+        credit_value
         ) VALUES (
-                     #{applicationId},
-                     #{studentId},
-                     #{categoryId},
-                     #{applicationReason},
-                     #{applyDate},
-                     #{status},
-                     #{creditValue}
-                 )
+        #{applicationId},
+        #{studentId},
+        #{categoryId},
+        #{applicationReason},
+        #{applyDate},
+        #{status},
+        #{creditValue}
+        )
     </insert>
 
     <update id="update" parameterType="org.example.entity.CreditApplication">

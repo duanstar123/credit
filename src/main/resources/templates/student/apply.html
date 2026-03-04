@@ -31,6 +31,39 @@
             margin-bottom: 15px;
         }
     </style>
+    <script>
+        // 页面加载完成后初始化
+        window.onload = function() {
+            // 初始化学分值
+            updateCreditValue();
+            // 打印学分类别映射，用于调试
+            console.log("学分类别映射:", categoryCreditMap);
+        };
+
+        // 学分类别对应的学分值
+        var categoryCreditMap = {
+            <th:each="category : ${categories ?: #lists.emptyList()}">
+                "[[${category?.categoryId}]]": [[${category?.creditValue}]]<th:if="!${loop.last}">,</th:if>
+            </th:each>
+        };
+
+        function updateCreditValue() {
+            var categoryId = document.getElementById('categoryId').value;
+            var creditValueInput = document.getElementById('creditValue');
+
+            console.log("选择的学分类别ID:", categoryId);
+            console.log("对应的学分值:", categoryCreditMap[categoryId]);
+
+            if (categoryId && categoryCreditMap[categoryId]) {
+                var creditValue = categoryCreditMap[categoryId];
+                creditValueInput.value = creditValue;
+                console.log("学分值更新为：" + creditValue);
+            } else {
+                creditValueInput.value = '';
+                console.log("未选择学分类别或学分值不存在，学分值为空");
+            }
+        }
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -55,32 +88,30 @@
                 </li>
             </ul>
         </div>
-
-        <!-- 主内容区 -->
+        <!-- 内容区域 -->
         <div class="col-md-9 content">
-            <div class="mb-4">
-                <h2>申请创新学分</h2>
-            </div>
-
-            <!-- 错误信息 -->
-            <div th:if="${error != null}" class="alert alert-danger">
-                <span th:text="${error}"></span>
-            </div>
-
-            <!-- 成功信息 -->
-            <div th:if="${success != null}" class="alert alert-success">
-                <span th:text="${success}"></span>
-            </div>
-
-            <!-- 申请表单 -->
+            <h2>申请创新学分</h2>
             <div class="card">
                 <div class="card-body">
-                    <form action="/student/apply" method="post" enctype="multipart/form-data">
+                    <!-- 成功信息 -->
+                    <div th:if="${success != null}" class="alert alert-success">
+                        <span th:text="${success}"></span>
+                    </div>
+
+                    <!-- 错误信息 -->
+                    <div th:if="${error != null}" class="alert alert-danger">
+                        <span th:text="${error}"></span>
+                    </div>
+
+                    <!-- 申请表单 -->
+                    <form action="/student/apply" method="post">
                         <div class="form-group">
                             <label for="categoryId" class="form-label">学分类别</label>
-                            <select class="form-control" id="categoryId" name="categoryId" required>
+                            <select class="form-control" id="categoryId" name="categoryId" required onchange="updateCreditValue()">
                                 <option value="">请选择学分类别</option>
-                                <option th:each="category : ${categories}" th:value="${category.categoryId}" th:text="${category.categoryName + ' (' + category.creditValue + '学分)'}"</option>
+                                <option th:each="category : ${categories ?: #lists.emptyList()}"
+                                        th:value="${category?.categoryId}"
+                                        th:text="${category?.categoryName + ' (' + category?.creditValue + '学分)'}"></option>
                             </select>
                         </div>
 
@@ -89,25 +120,7 @@
                             <textarea class="form-control" id="applicationReason" name="applicationReason" rows="4" required placeholder="请详细描述申请理由"></textarea>
                         </div>
 
-                        <div class="form-group">
-                            <label for="screenshot" class="form-label">作品截图</label>
-                            <input type="file" class="form-control" id="screenshot" name="screenshot">
-                            <small class="form-text text-muted">请上传一张作品截图</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="certificate" class="form-label">证书图片</label>
-                            <input type="file" class="form-control" id="certificate" name="certificate">
-                            <small class="form-text text-muted">请上传一张证书图片</small>
-                        </div>
-
-                        <div class="form-group">
-                            <label for="sourceCode" class="form-label">源代码压缩包</label>
-                            <input type="file" class="form-control" id="sourceCode" name="sourceCode">
-                            <small class="form-text text-muted">请上传一个源代码压缩包</small>
-                        </div>
-
-                        <input type="hidden" name="studentId" th:value="${student.studentId}">
+                        <input type="hidden" id="creditValue" name="creditValue" required>
 
                         <button type="submit" class="btn btn-primary">提交申请</button>
                     </form>

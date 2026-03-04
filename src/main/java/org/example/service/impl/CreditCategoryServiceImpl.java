@@ -21,7 +21,10 @@ public class CreditCategoryServiceImpl implements CreditCategoryService {
         try {
             System.out.println("=== CreditCategoryService.getAllCategories ===");
             List<CreditCategory> categories = creditCategoryMapper.selectAll();
-            System.out.println("查询到的学分类别数量: " + categories.size());
+            System.out.println("获取到的学分类别数量: " + categories.size());
+            for (CreditCategory category : categories) {
+                System.out.println("  - 类别ID: " + category.getCategoryId() + ", 名称: " + category.getCategoryName() + ", 学分值: " + category.getCreditValue());
+            }
             return categories;
         } catch (Exception e) {
             System.out.println("=== CreditCategoryService.getAllCategories 异常 ===");
@@ -33,11 +36,7 @@ public class CreditCategoryServiceImpl implements CreditCategoryService {
     @Override
     public CreditCategory getCategoryById(String categoryId) {
         try {
-            System.out.println("=== CreditCategoryService.getCategoryById ===");
-            System.out.println("查询分类ID: " + categoryId);
-            CreditCategory category = creditCategoryMapper.selectByCategoryId(categoryId);
-            System.out.println("查询结果: " + (category != null ? "找到" : "未找到"));
-            return category;
+            return creditCategoryMapper.selectById(categoryId);
         } catch (Exception e) {
             System.out.println("=== CreditCategoryService.getCategoryById 异常 ===");
             e.printStackTrace();

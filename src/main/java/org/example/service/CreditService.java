@@ -17,4 +17,5 @@ public interface CreditService {
     double getTotalCreditByStudentId(String studentId);
     int getPendingApplicationCountByStudentId(String studentId);
     int getTotalApplicationCountByStudentId(String studentId);
+
 }
