@@ -1,7 +1,16 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.entity;
 
 import java.io.Serializable;
 
+/**
+ * 教师实体类
+ * @author 段璎芮
+ * @version 1.0
+ */
 public class Teacher implements Serializable {
     private String teacherId;
     private String password;

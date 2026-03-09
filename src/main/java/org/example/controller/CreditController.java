@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.controller;
 
 import org.example.entity.CreditApplication;
@@ -18,6 +22,11 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+/**
+ * 学分申请控制器
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/credit")  // 修改：移除 /credit 前缀
 public class CreditController {

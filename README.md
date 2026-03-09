@@ -9,7 +9,7 @@ JDK 17 或更高版本
 MySQL 8.0 或更高版本  
 Maven 3.8 或更高版本  
 数据库配置：  
-创建数据库：CREATE DATABASE coursedesign1 CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;  
+创建数据库：CREATE DATABASE coursedesign1;
 修改 src/main/resources/application.properties 文件中的数据库连接信息
 
 运行步骤
@@ -17,9 +17,9 @@ Maven 3.8 或更高版本
 构建项目：mvn clean install  
 运行项目：mvn spring-boot:run  
 访问系统：  
-登录页面：http://localhost:8085/login  
-教师端：http://localhost:8085/teacher/login  
-学生端：http://localhost:8085/student/login  
+登录页面：http://localhost:8086/login  
+教师端：http://localhost:8086/teacher/login  
+学生端：http://localhost:8086/student/login  
 
 功能说明
 
@@ -39,7 +39,7 @@ Maven 3.8 或更高版本
 
 技术栈
 
-后端：Spring Boot 3.x、MyBatis 3.x  
-前端：Thymeleaf、Bootstrap 5.x  
+后端：Spring Boot、MyBatis 
+前端：Thymeleaf、Bootstrap  
 数据库：MySQL  
 构建工具：Maven 

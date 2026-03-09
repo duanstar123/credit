@@ -28,19 +28,19 @@
 
     <!-- 核心依赖 -->
     <dependencies>
-        <!-- Web 依赖（必须） -->
+        <!-- Web 依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <!-- Thymeleaf 模板依赖（必须，渲染HTML页面） -->
+        <!-- Thymeleaf 模板依赖，渲染HTML页面 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
 
-        <!-- MyBatis + MySQL 依赖（如果用数据库需要保留） -->
+        <!-- MyBatis + MySQL 依赖 -->
         <dependency>
             <groupId>org.mybatis.spring.boot</groupId>
             <artifactId>mybatis-spring-boot-starter</artifactId>
@@ -52,14 +52,14 @@
             <scope>runtime</scope>
         </dependency>
 
-        <!-- POI 依赖（Excel处理，可选） -->
+        <!-- POI 依赖，Excel处理 -->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.5</version>
         </dependency>
 
-        <!-- 测试依赖（可选） -->
+        <!-- 测试依赖 -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>
@@ -67,7 +67,7 @@
         </dependency>
     </dependencies>
 
-    <!-- 打包插件（必须） -->
+    <!-- 打包插件 -->
     <build>
         <plugins>
             <plugin>

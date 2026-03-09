@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.controller;
 
 import org.example.entity.CreditApplication;
@@ -20,6 +24,11 @@ import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * 教师控制器
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/teacher")  // 修改：移除 /credit 前缀
 public class TeacherController {

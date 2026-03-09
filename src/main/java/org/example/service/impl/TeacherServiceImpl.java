@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.service.impl;
 
 import org.example.entity.Teacher;
@@ -7,6 +11,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * 教师数据访问服务实现类
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Service
 public class TeacherServiceImpl implements TeacherService {
     private final TeacherMapper teacherMapper;

@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.controller;
 
 import org.example.entity.ClassInfo;
@@ -13,8 +17,13 @@ import org.springframework.web.servlet.ModelAndView;
 import jakarta.servlet.http.HttpSession;
 import java.util.Map;
 
+/**
+ * 班级控制器
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Controller
-@RequestMapping("/class")  // 修改：移除 /credit 前缀
+@RequestMapping("/class")
 public class ClassController {
 
     @Autowired
@@ -26,7 +35,7 @@ public class ClassController {
         ModelAndView mav = new ModelAndView("teacher/class/create");
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
+            mav.setViewName("redirect:/login");
             return mav;
         }
         return mav;
@@ -37,10 +46,10 @@ public class ClassController {
     public ModelAndView submitCreateClass(
             @RequestParam Map<String, Object> params,
             HttpSession session) {
-        ModelAndView mav = new ModelAndView("redirect:/teacher/classes");  // 修改：移除 /credit 前缀
+        ModelAndView mav = new ModelAndView("redirect:/teacher/classes");
         // 检查登录状态
         if (session.getAttribute("teacher") == null) {
-            mav.setViewName("redirect:/login");  // 修改：移除 /credit 前缀
+            mav.setViewName("redirect:/login");
             return mav;
         }
 

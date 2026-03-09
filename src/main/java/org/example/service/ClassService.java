@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.service;
 
 import org.example.entity.ClassInfo;
@@ -5,6 +9,11 @@ import org.example.entity.ClassInfo;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 班级数据访问服务接口
+ * @author 段璎芮
+ * @version 1.0
+ */
 public interface ClassService {
     // 添加班级
     void addClass(ClassInfo classInfo);

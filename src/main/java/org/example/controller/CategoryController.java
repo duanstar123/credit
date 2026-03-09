@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.controller;
 
 import org.example.entity.CreditCategory;
@@ -12,11 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import jakarta.servlet.http.HttpSession;
 import java.util.Date;
 
+/**
+ * 学分类别控制器
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Controller
 @RequestMapping("/category")
 public class CategoryController {
     private final CreditCategoryService creditCategoryService;
-
     public CategoryController(CreditCategoryService creditCategoryService) {
         this.creditCategoryService = creditCategoryService;
     }

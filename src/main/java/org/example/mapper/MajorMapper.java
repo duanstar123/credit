@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.mapper;
 
 import org.example.entity.Major;
@@ -5,6 +9,11 @@ import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
+/**
+ * 专业数据访问接口
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Mapper
 public interface MajorMapper {
     // 查询所有专业

@@ -1,7 +1,16 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.entity;
 
 import java.io.Serializable;
 
+/**
+ * 班级数据访问对象
+ * @author 段璎芮
+ * @version 1.0
+ */
 public class Major implements Serializable {
     private String majorId;
     private String majorName;

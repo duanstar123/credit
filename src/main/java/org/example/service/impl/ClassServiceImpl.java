@@ -1,3 +1,7 @@
+/*
+ *中北大学软件学院
+ *2413040403 段璎芮
+ */
 package org.example.service.impl;
 
 import org.example.entity.ClassInfo;
@@ -9,6 +13,11 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * 班级数据访问服务实现类
+ * @author 段璎芮
+ * @version 1.0
+ */
 @Service
 public class ClassServiceImpl implements ClassService {
 
